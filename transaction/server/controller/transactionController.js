@@ -44,6 +44,7 @@ const transaction = {
           }
         })  
       }else {
+        // if insufficient fund
         let log = {
           senderEmail: senderDetails.data[0].email,
           receiverEmail: receiverDetails.data[0].email,
@@ -58,6 +59,7 @@ const transaction = {
         })
       }
     }else {
+      // if incorrect pin
       let log = {
         senderEmail: senderDetails.data[0].email,
         receiverEmail: receiverDetails.data[0].email,
@@ -126,7 +128,7 @@ const transaction = {
               status: 'successful',
               statusDescription: 'OTP confirmed'
             }
-            transactionModel.findOneAndUpdate({otpID: data.id},{status: 'successful'}, function(err, result){
+            transactionModel.findOneAndUpdate({otpID: data.id},log, function(err, result){
               if (err) return res.status(409).json({err, message: 'Some error occured'});
               return res.status(200).json({result, message: 'Transaction successful'})
             })
@@ -147,6 +149,7 @@ const transaction = {
                 return res.status(200).json({result, message: 'Transaction not successful'})
               })
             }else {
+              // money not rolled back and not sent
               let log = {
                 status: 'NOT successful',
                 statusDescription: 'Money not sent to receiver, NOT rolled back'
@@ -154,12 +157,12 @@ const transaction = {
               // update transaction log
               transactionModel.findOneAndUpdate({otpID: data.id},log, function(err, result){
                 if (err) return res.status(409).json({err, message: 'Some error occured'});
-                return res.status(200).json({result, message: 'Transaction successful'})
+                return res.status(200).json({result, message: 'Transaction not successful'})
               })
             }
-            
           }
         }else {
+          //user not found or some other error
           let log = {
             status: "NOT successful",
             statusDescription: "Money not sent"
