@@ -1,0 +1,32 @@
+{
+  "name": "bettapoint_test",
+  "version": "1.0.0",
+  "description": "software engineering test for Bettapoint",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "SET NODE_ENV=development && nodemon server/bin/dev",
+    "build": "rimraf dist/ && mkdir dist && babel server -s -d dist",
+    "start": "node dist/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "babel-polyfill": "^6.26.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "messagebird": "^3.3.0",
+    "mongoose": "^5.7.12",
+    "moongoose": "0.0.5",
+    "morgan": "^1.9.1",
+    "rimraf": "^3.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-istanbul": "^5.1.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0"
+  }
+}
