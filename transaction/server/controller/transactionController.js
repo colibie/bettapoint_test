@@ -1,7 +1,7 @@
 const transactionModel = require('../model/transactionModel'),
  axios = require('axios'),
- { sendToken, verifyToken } = require('./otp'),
- messageBird = require('messagebird')('QfftIeJzPX9mmfUe9kLF6HtrL');
+ { messageBirdKEY } = require('../config'),
+ messageBird = require('messagebird')(messageBirdKEY);
 
 
 const transaction = {
